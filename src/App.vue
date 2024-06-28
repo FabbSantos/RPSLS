@@ -1,47 +1,99 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Game from './components/Game.vue';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  const h1 = document.querySelector('h1');
+  if (h1) {
+    h1.innerHTML = h1.textContent.trim().split(' ').map(part => `<span>${part.trim()}</span>`).join('');
+  }
+});
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <div class="headeboard">
+        <h1>
+          Rock Papers Scissors Lizard Spock
+        </h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+        <div class="score">
+          <p>score</p>
+          <p>0</p>
+        </div>
     </div>
   </header>
 
   <main>
-    <TheWelcome />
+    <Game/>
   </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
+  main {
+    width: 100%;
+  }
+  .headeboard {
+    border: 5px solid var(--header-outline);
+    border-radius: calc(var(--border-radius) + 10px);
+    padding: 1.5rem;
+    min-width: 52svw;
+    color: white;
+    text-align: center;
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
+  h1 {
+    font-size: clamp(2rem, 2.3vw, 2.5rem);
+    line-height: 32px;
+    font-weight: 700;
+    text-align: left;
   }
+  h1 > *{
+    display: inline-block;
+    width: 100%;
+    font-weight: inherit;
 
-  header .wrapper {
+  }
+  .score {
+    --min-width: 80px;
+    background-color: white;
+    box-shadow: 0 0 10px 2px var(--header-outline);
     display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 1vw, 1rem);
+    font-weight: 700;
+    min-width: var(--min-width);
+    padding: 1rem;
+    padding-inline: calc(var(--min-width) - 2rem);
+    aspect-ratio: 2 / 1;
+    border-radius: var(--border-radius);
+    letter-spacing: 3px;
   }
-}
+  .score > p {
+    color: var(--score-text);
+    font-weight: 600;
+  }
+  .score > p:nth-of-type(2) {
+    font-size: clamp(1.5rem, 3vw, 5rem);
+    font-weight: inherit;
+    color: var(--dark-text);
+    line-height: 1.1;
+  }
+
+  @media (max-width: 768px){
+    .headeboard {
+      flex-direction: column;
+      gap: 2rem
+    }
+    h1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 </style>

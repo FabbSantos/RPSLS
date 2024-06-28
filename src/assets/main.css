@@ -1,24 +1,26 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
+  position: relative;
+  font-family: 'Barlow Semi Condensed', sans-serif;
   margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 90%;
+  width: 100%;
+  gap: 6rem;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+body {
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
 @media (min-width: 1024px) {
@@ -27,9 +29,6 @@ a,
     place-items: center;
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+  /* #app {
+  } */
 }

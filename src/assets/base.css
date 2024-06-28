@@ -19,11 +19,40 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+
+  --scissors-gradient: hsl(39, 89%, 49%), hsl(40, 84%, 53%);
+  --scissors-color: hsl(39, 89%, 49%);
+  --scissors-color-opacity: hsla(39, 89%, 49%, .7);
+
+  --paper-gradient: hsl(230, 89%, 62%), hsl(230, 89%, 65%);
+  --paper-color: hsl(230, 89%, 62%);
+  --paper-color-opacity: hsla(230, 89%, 62%, .7);
+
+  --rock-gradient: hsl(349, 71%, 52%), hsl(349, 70%, 56%);
+  --rock-color: hsl(349, 71%, 52%);
+  --rock-color-opacity: hsla(349, 71%, 52%, .7);
+
+  --lizard-gradient: hsl(261, 73%, 60%), hsl(261, 72%, 63%);
+  --lizard-color: hsl(261, 73%, 60%);
+  --lizard-color-opacity: hsla(261, 73%, 60%, .7);
+
+  --spock-gradient: hsl(189, 59%, 53%), hsl(189, 58%, 57%);
+  --spock-color: hsl(189, 59%, 53%);
+  --spock-color-opacity: hsla(189, 59%, 53%, .7);
+
+  --dark-text: hsl(229, 25%, 31%);
+  --score-text: hsl(229, 64%, 46%);
+  --header-outline: hsl(217, 16%, 45%);
+
+  --radial-gradient: hsl(214, 47%, 23%), hsl(237, 49%, 15%);
+
+  --border-radius: 10px;
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
+  --color-background: var(--radial-gradient);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
 
@@ -38,7 +67,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
+    --color-background: var(--radial-gradient);
     --color-background-soft: var(--vt-c-black-soft);
     --color-background-mute: var(--vt-c-black-mute);
 
@@ -50,6 +79,9 @@
   }
 }
 
+* {
+  transition: all .2s ease-in-out;
+}
 *,
 *::before,
 *::after {
@@ -61,24 +93,13 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background-image: linear-gradient(var(--color-background))!important;
+
   transition:
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+  font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
