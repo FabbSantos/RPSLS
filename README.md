@@ -1,29 +1,9 @@
-# rpsls
+# This is Rock, Paper, Scissors, Lizard, Spock game!
 
-This template should help get you started developing with Vue 3 in Vite.
+## Hello! This project was developed with Vue 3 and Vite!
 
-## Recommended IDE Setup
+### This is a Frontend Mentor challenge! Check my solution out below!
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[RPSLS](https://www.frontendmentor.io/solutions/rock-paper-scissors-lizard-spock-with-vue-FJKeM3ZxzM)  /  [Coded By](github.com/FabbSantos)
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+[Project Live!](https://rpsls-nu.vercel.app/)
