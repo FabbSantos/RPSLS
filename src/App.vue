@@ -1,6 +1,11 @@
 <script setup>
 import Game from './components/Game.vue';
-import { onMounted } from 'vue';
+import Footer from './components/Footer.vue';
+import { onMounted, provide, ref } from 'vue';
+
+
+let score = ref(0);
+provide('score', score);
 
 onMounted(() => {
   const h1 = document.querySelector('h1');
@@ -19,7 +24,7 @@ onMounted(() => {
 
         <div class="score">
           <p>score</p>
-          <p>0</p>
+          <p> {{score}} </p>
         </div>
     </div>
   </header>
@@ -27,6 +32,8 @@ onMounted(() => {
   <main>
     <Game/>
   </main>
+
+  <Footer />
 </template>
 
 <style scoped>
@@ -46,7 +53,7 @@ onMounted(() => {
     text-transform: uppercase;
   }
   h1 {
-    font-size: clamp(2rem, 2.3vw, 2.5rem);
+    font-size: clamp(1rem, 2.3vw, 2.5rem);
     line-height: 32px;
     font-weight: 700;
     text-align: left;
@@ -79,21 +86,29 @@ onMounted(() => {
     font-weight: 600;
   }
   .score > p:nth-of-type(2) {
-    font-size: clamp(1.5rem, 3vw, 5rem);
+    font-size: clamp(2rem, 3vw, 5rem);
     font-weight: inherit;
     color: var(--dark-text);
     line-height: 1.1;
   }
 
   @media (max-width: 768px){
-    .headeboard {
-      flex-direction: column;
-      gap: 2rem
+    .score {
+          --min-width: 50px;
+          letter-spacing: 1px;
     }
+    .headeboard {
+      gap: 2rem;
+    }
+    header {
+        width: 90%;
+    }
+    
     h1 {
       display: flex;
       flex-direction: column;
       align-items: center;
+      line-height: 15px;
     }
   }
 </style>
