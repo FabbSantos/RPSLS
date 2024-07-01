@@ -18,12 +18,12 @@ let computerChoice = ref('');
 let score = inject('score');
 let resultsBeShown = ref(false);
 let isPlayAgain = ref(false);
+let winner = ref('');
 
 
 const handlePlayerChoice =  (choice) => {
         playerChoice.value = choice;
         resultsBeShown.value = true;
-        console.log(playerChoice.value);
         isComputerLoading.value = true;
         generateComputerChoice();
         determineWinner();
@@ -37,19 +37,25 @@ const generateComputerChoice =  () => {
 };
 
 const determineWinner =  () => {
+        console.log(playerChoice.value, 'vs', computerChoice.value);
+
         setTimeout(() => {
                 if (playerChoice.value === computerChoice.value) {
                         resultString.value = 'It\'s a tie';
                 } else if (gameMap.get(playerChoice.value).includes(computerChoice.value)) {
+                        winner.value = playerChoice.value;
                         resultString.value = 'you win';
                         score.value++;
                 } else {
+                        winner.value = computerChoice.value;
                         resultString.value = 'you lose';
                         score.value == 0 ? score.value : score.value--;
                 }
+
                 isComputerLoading.value = false;
                 isPlayAgain.value = true;
                 localStorage.setItem('score', score.value);
+                
         }, 2000);
 };
 
@@ -59,6 +65,7 @@ const playAgain =  () => {
         computerChoice.value = '';
         resultString.value = '';
         isPlayAgain.value = false;
+        winner.value = '';
 };
 
 onMounted(() => {
@@ -81,7 +88,7 @@ onMounted(() => {
 </script>
 
 <template>
-        <div class="buttons" v-if="!resultsBeShown">
+        <div class="buttons" v-show="!resultsBeShown">
 
                 <button class="btn btn-scissors picking" aria-label="scissors" @click="handlePlayerChoice('scissors')">
                         <img :src="gameIcons[0]" alt="Scissors" />
@@ -100,31 +107,31 @@ onMounted(() => {
                 </button>
         </div>
 
-        <div class="results" v-if="resultsBeShown">
-                <div class="yourPick" v-if="playerChoice">
+        <div class="results" v-show="resultsBeShown">
+                <div class="yourPick" v-show="playerChoice">
                         <p>You Picked</p>
-                        <button v-if="playerChoice === 'scissors'"
-                                :class="'btn ' + (playerChoice === 'scissors' ? 'btn-scissors picked' : '')"
+                        <button v-show="playerChoice === 'scissors'"
+                                :class="'btn ' + (playerChoice === 'scissors' ? 'btn-scissors picked' : '') + (winner === 'scissors' ? ' winner' : '')"
                                 aria-label="scissors">
                                 <img :src="gameIcons[0]" alt="Scissors" />
                         </button>
-                        <button v-if="playerChoice === 'spock'"
-                                :class="'btn ' + (playerChoice === 'spock' ? 'btn-spock picked' : '')"
+                        <button v-show="playerChoice === 'spock'"
+                                :class="'btn ' + (playerChoice === 'spock' ? 'btn-spock picked' : '') + (winner === 'spock' ? ' winner' : '')"
                                 aria-label="spock">
                                 <img :src="gameIcons[1]" alt="Spock" />
                         </button>
-                        <button v-if="playerChoice === 'paper'"
-                                :class="'btn ' + (playerChoice === 'paper' ? 'btn-paper picked' : '')"
+                        <button v-show="playerChoice === 'paper'"
+                                :class="'btn ' + (playerChoice === 'paper' ? 'btn-paper picked' : '') + (winner === 'paper' ? ' winner' : '')"
                                 aria-label="paper">
                                 <img :src="gameIcons[2]" alt="Paper" />
                         </button>
-                        <button v-if="playerChoice === 'lizard'"
-                                :class="'btn ' + (playerChoice === 'lizard' ? 'btn-lizard picked' : '')"
+                        <button v-show="playerChoice === 'lizard'"
+                                :class="'btn ' + (playerChoice === 'lizard' ? 'btn-lizard picked' : '') + (winner === 'lizard' ? ' winner' : '')"
                                 aria-label="lizard">
                                 <img :src="gameIcons[3]" alt="Lizard" />
                         </button>
-                        <button v-if="playerChoice === 'rock'"
-                                :class="'btn ' + (playerChoice === 'rock' ? 'btn-rock picked' : '')" aria-label="rock">
+                        <button v-show="playerChoice === 'rock'"
+                                :class="'btn ' + (playerChoice === 'rock' ? 'btn-rock picked' : '') + (winner === 'rock' ? ' winner' : '')" aria-label="rock">
                                 <img :src="gameIcons[4]" alt="Rock" />
                         </button>
                 </div>
@@ -144,32 +151,32 @@ onMounted(() => {
                         <div class="ball"></div>
                 </div>
 
-                <div class="computerPick" v-if="computerChoice && !isComputerLoading">
+                <div class="computerPick" v-show="computerChoice && !isComputerLoading">
                         <p>The house Picked</p>
 
 
-                        <button v-if="computerChoice === 'scissors'"
-                                :class="'btn ' + (computerChoice === 'scissors' ? 'btn-scissors picked' : '')"
+                        <button v-show="computerChoice === 'scissors'"
+                                :class="'btn ' + (computerChoice === 'scissors' ? 'btn-scissors picked' : '') + (winner === 'scissors' ? ' winner' : '')"
                                 aria-label="scissors">
                                 <img :src="gameIcons[0]" alt="Scissors" />
                         </button>
-                        <button v-if="computerChoice === 'spock'"
-                                :class="'btn ' + (computerChoice === 'spock' ? 'btn-spock picked' : '')"
+                        <button v-show="computerChoice === 'spock'"
+                                :class="'btn ' + (computerChoice === 'spock' ? 'btn-spock picked' : '') + (winner === 'spock' ? ' winner' : '')"
                                 aria-label="spock">
                                 <img :src="gameIcons[1]" alt="Spock" />
                         </button>
-                        <button v-if="computerChoice === 'paper'"
-                                :class="'btn ' + (computerChoice === 'paper' ? 'btn-paper picked' : '')"
+                        <button v-show="computerChoice === 'paper'"
+                                :class="'btn ' + (computerChoice === 'paper' ? 'btn-paper picked' : '') + (winner === 'paper' ? ' winner' : '')"
                                 aria-label="paper">
                                 <img :src="gameIcons[2]" alt="Paper" />
                         </button>
-                        <button v-if="computerChoice === 'lizard'"
-                                :class="'btn ' + (computerChoice === 'lizard' ? 'btn-lizard picked' : '')"
+                        <button v-show="computerChoice === 'lizard'"
+                                :class="'btn ' + (computerChoice === 'lizard' ? 'btn-lizard picked' : '') + (winner === 'lizard' ? ' winner' : '')"
                                 aria-label="lizard">
                                 <img :src="gameIcons[3]" alt="Lizard" />
                         </button>
-                        <button v-if="computerChoice === 'rock'"
-                                :class="'btn ' + (computerChoice === 'rock' ? 'btn-rock picked' : '')"
+                        <button v-show="computerChoice === 'rock'"
+                                :class="'btn ' + (computerChoice === 'rock' ? 'btn-rock picked' : '') + (winner === 'rock' ? ' winner' : '')"
                                 aria-label="rock">
                                 <img :src="gameIcons[4]" alt="Rock" />
                         </button>
@@ -341,6 +348,45 @@ onMounted(() => {
                 color: white;
         }
 
+        .winner::before {
+                content: '';
+                position: absolute;
+                z-index: 9999;
+                width: 100%;
+                height: 100%;
+                border-radius:100%; 
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                animation: box-shadow-expand 2s ease-in-out infinite;                
+                box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.09),
+                                0 0 0 40px rgba(255, 255, 255, 0.06),
+                                0 0 0 60px rgba(255, 255, 255, 0.03);
+        }
+@keyframes box-shadow-expand {
+        0% {
+                /* Sombra inicial (0% de expansão) */
+                box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.09),
+                        0 0 0 40px rgba(255, 255, 255, 0.06),
+                        0 0 0 60px rgba(255, 255, 255, 0.03);
+        }
+
+        50% {
+                /* Sombra final (100% de expansão) */
+                box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.09),
+                        0 0 0 50px rgba(255, 255, 255, 0.06),
+                        0 0 0 70px rgba(255, 255, 255, 0.03);
+        }
+        100% {
+                box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.09),
+                                0 0 0 40px rgba(255, 255, 255, 0.06),
+                                0 0 0 60px rgba(255, 255, 255, 0.03);
+        }
+}
+
+        .btn.btn-rock {
+                animation: glow 1s infinite;
+        }
         .resetButtons {
                 display: grid;
                 place-items: center;
