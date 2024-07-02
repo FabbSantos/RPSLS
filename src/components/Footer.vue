@@ -6,7 +6,9 @@
 
 <template>
         <footer>
-                <p>Challenge by <a href="www.frontendmentor.io">FrontEnd Mentor</a> / developed by Fabrício Bahiense</p>
+                <p>Challenge by <a href="www.frontendmentor.io" target="_blank">FrontEnd Mentor</a> / developed by <a
+                                href="https://github.com/FabbSantos" target="_blank">Fabrício Bahiense</a></p>
+                <p>Find me <a href="https://fabs-work.vercel.app/" target="_blank">here</a></p>
 
                 <button @click="showRules = true">
                         Rules
@@ -15,7 +17,8 @@
                 <div class="modal" v-if="showRules">
                         <img src="../assets/images/image-rules-bonus.svg" alt="Rules of the game        ">
 
-                        <button @click="showRules = !showRules"> <img src="../assets/images/icon-close.svg" alt="Close Rules"></button>
+                        <button @click="showRules = !showRules"> <img src="../assets/images/icon-close.svg"
+                                        alt="Close Rules"></button>
                 </div>
         </footer>
 </template>

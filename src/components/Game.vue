@@ -592,14 +592,14 @@ onMounted(() => {
         }
 
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
                 .buttons {
                         max-width: 90%;
                         width: auto;
                 }
                 .results {
                         grid-template-columns: 1fr 1fr;
-                        grid-template-rows: 1fr 1fr;
+                        grid-template-rows: 1fr .6fr;
                         max-width: 90%;
                         gap: 1rem;
                 }
@@ -625,14 +625,11 @@ onMounted(() => {
                         font-size: clamp(3rem, 4vw, 3rem);
                 }
                 .yourPick p, .computerPick p {
-                        font-size: clamp(.9rem, 1vw, 1.5rem);
+                        font-size: clamp(.6rem, 1vw, 1rem);
                         font-weight: 700;
                         letter-spacing: 2px;
                         text-transform: uppercase;
                         color: white;
-                }
-                .yourPick button, .computerPick button {
-                        max-width: 60% !important;
                 }
 
         }
@@ -641,5 +638,17 @@ onMounted(() => {
                         max-width: 50%;
                         width: auto;
                 }
+        }
+        @media (max-width: 768px) {
+                .yourPick button,
+                        .computerPick button {
+                                max-width: 40% !important;
+                        }
+        }
+        @media (max-width: 425px) {
+                .yourPick button,
+                        .computerPick button {
+                                max-width: 60% !important;
+                        }
         }
 </style>
